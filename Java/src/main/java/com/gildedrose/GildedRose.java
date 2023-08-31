@@ -15,7 +15,7 @@ class GildedRose {
 
     private void updateItem(Item item) {
         updateQuality(item);
-        decreaseDaysToExpiry(item);
+        updateDaysToExpiry(item);
         if (isExpired(item)) {
             processExpired(item);
         }
@@ -36,16 +36,15 @@ class GildedRose {
                     return;
         }
         else {
-            if (item.quality > 0) {
-                item.quality = item.quality - 1;
-            }
+            decrementQuality(item);
         }
     }
 
-    private void decreaseDaysToExpiry(Item item) {
-        if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-            item.sellIn = item.sellIn - 1;
+    private void updateDaysToExpiry(Item item) {
+        if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            return;
         }
+        item.sellIn = item.sellIn - 1;
     }
 
     private void updateQuality(Item item) {
@@ -65,15 +64,19 @@ class GildedRose {
                     return;
         }
         else {
-            if (item.quality > 0) {
-                item.quality = item.quality - 1;
-            }
+            decrementQuality(item);
         }
     }
 
     private void incrementQuality(Item item) {
         if (item.quality < 50) {
             item.quality = item.quality + 1;
+        }
+    }
+
+    private void decrementQuality(Item item) {
+        if (item.quality > 0) {
+            item.quality = item.quality - 1;
         }
     }
 }
