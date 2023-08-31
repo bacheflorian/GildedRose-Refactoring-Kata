@@ -14,7 +14,7 @@ class GildedRose {
     }
 
     private void updateItem(Item item) {
-        increaseQuality(item);
+        updateQuality(item);
         decreaseDaysToExpiry(item);
         if (isExpired(item)) {
             processExpired(item);
@@ -37,9 +37,7 @@ class GildedRose {
                 item.quality = item.quality - item.quality;
             }
         } else {
-            if (item.quality < 50) {
-                item.quality = item.quality + 1;
-            }
+            incrementQuality(item);
         }
     }
 
@@ -49,32 +47,32 @@ class GildedRose {
         }
     }
 
-    private void increaseQuality(Item item) {
-        if (!item.name.equals("Aged Brie")
-            && !item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+    private void updateQuality(Item item) {
+        if (item.name.equals("Aged Brie")) {
+            incrementQuality(item);
+        }
+        else if(item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            incrementQuality(item);
+            if (item.sellIn < 11) {
+                incrementQuality(item);
+            }
+            if (item.sellIn < 6) {
+                incrementQuality(item);
+            }
+        }
+        else if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+                    return;
+        }
+        else {
             if (item.quality > 0) {
-                if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                    item.quality = item.quality - 1;
-                }
+                item.quality = item.quality - 1;
             }
-        } else {
-            if (item.quality < 50) {
-                item.quality = item.quality + 1;
+        }
+    }
 
-                if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                    if (item.sellIn < 11) {
-                        if (item.quality < 50) {
-                            item.quality = item.quality + 1;
-                        }
-                    }
-
-                    if (item.sellIn < 6) {
-                        if (item.quality < 50) {
-                            item.quality = item.quality + 1;
-                        }
-                    }
-                }
-            }
+    private void incrementQuality(Item item) {
+        if (item.quality < 50) {
+            item.quality = item.quality + 1;
         }
     }
 }
