@@ -18,6 +18,9 @@ public class InventoryItem {
         else if (item.name.equals(Sulfuras.ITEMNAME)) {
             return new Sulfuras(item);
         }
+        else if (item.name.equals(Conjured.ITEMNAME)) {
+            return new Conjured(item);
+        }
 
         return new InventoryItem(item);
     }
