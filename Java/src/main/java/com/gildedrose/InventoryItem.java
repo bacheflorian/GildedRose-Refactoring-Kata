@@ -3,7 +3,8 @@ package com.gildedrose;
 public class InventoryItem {
 
     public static final String BRIE = "Aged Brie";
-    private Item item;
+    public static final String BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
+    protected Item item;
 
     public InventoryItem(Item item) {
         this.item = item;
@@ -12,6 +13,9 @@ public class InventoryItem {
     public static InventoryItem createItem(Item item) {
         if (item.name.equals(BRIE)) {
             return new AgedBrie(item);
+        }
+        else if (item.name.equals(BACKSTAGE)) {
+            return new BackstagePasses(item);
         }
         return new InventoryItem(item);
     }
@@ -37,10 +41,7 @@ public class InventoryItem {
     }
 
     protected void processExpired() {
-        if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-            item.quality = 0;
-        }
-        else if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+        if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
                     return;
         }
         else {
@@ -60,16 +61,7 @@ public class InventoryItem {
     }
 
     protected void updateQuality() {
-        if(item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-            incrementQuality();
-            if (item.sellIn < 11) {
-                incrementQuality();
-            }
-            if (item.sellIn < 6) {
-                incrementQuality();
-            }
-        }
-        else if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+        if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
                     return;
         }
         else {
