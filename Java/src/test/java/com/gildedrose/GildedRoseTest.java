@@ -10,7 +10,7 @@ class GildedRoseTest {
     void nameRemainsTheSameAfterCallingUpdateQuality() {
         Item[] items = new Item[] { new Item("foo", 0, 0) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertEquals("foo", app.items[0].name);
     }
 
@@ -18,7 +18,7 @@ class GildedRoseTest {
     void itemToStringDisplaysCorrectlyForRegularItem(){
         Item[] items = new Item[] { new Item("foo", 0, 0) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertEquals(items[0].toString(),"foo, -1, 0");
     }
 
@@ -27,7 +27,7 @@ class GildedRoseTest {
     void qualityAndSellInDecreaseForRegularItems() {
         Item[] items = new Item[] { new Item("Regular Item", 15, 15) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality == 14 && items[0].sellIn == 14);
     }
 
@@ -36,7 +36,7 @@ class GildedRoseTest {
     void qualityDecreasesByTwoForRegularItem() {
         Item[] items = new Item[] { new Item("Regular Item", 0, 5) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality == 3);
     }
 
@@ -44,7 +44,7 @@ class GildedRoseTest {
     void qualityIncreasesByTwoForAgedBrie() {
         Item[] items = new Item[] { new Item("Aged Brie", 0, 5) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality == 7);
     }
 
@@ -53,7 +53,7 @@ class GildedRoseTest {
     void qualityNeverNegativeForRegularItem() {
         Item[] items = new Item[] { new Item("Regular Item", 5, 0) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality >= 0);
     }
 
@@ -61,7 +61,7 @@ class GildedRoseTest {
     void qualityNeverNegativeForAgedBrie() {
         Item[] items = new Item[] { new Item("Aged Brie", 5, 0) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality >= 0);
     }
 
@@ -69,7 +69,7 @@ class GildedRoseTest {
     void qualityNeverNegativeForSulfuras() {
         Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 5, 0) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality >= 0);
     }
 
@@ -77,7 +77,7 @@ class GildedRoseTest {
     void qualityNeverNegativeForBackstagePasses() {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 5, 0) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality >= 0);
     }
 
@@ -86,7 +86,7 @@ class GildedRoseTest {
     void qualityIncreasesAsSellInDecreasesForAgedBrie() {
         Item[] items = new Item[] { new Item("Aged Brie", 1, 5) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality == 6 && items[0].sellIn == 0);
     }
 
@@ -95,7 +95,7 @@ class GildedRoseTest {
     void qualityNeverGreaterThanFiftyForAgedBrie() {
         Item[] items = new Item[] { new Item("Aged Brie", 5, 50) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality == 50);
     }
 
@@ -103,7 +103,7 @@ class GildedRoseTest {
     void qualityNeverGreaterThanFiftyForBackstagePassesSellInGreaterThanTen() {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 11, 50) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality == 50);
     }
 
@@ -111,7 +111,7 @@ class GildedRoseTest {
     void qualityNeverGreaterThanFiftyForBackstagePassesSellInGreaterThanFive() {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 6, 50) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality == 50);
     }
 
@@ -119,7 +119,7 @@ class GildedRoseTest {
     void qualityNeverGreaterThanFiftyForBackstagePassesSellInGreaterThanZero() {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 1, 50) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality == 50);
     }
 
@@ -128,7 +128,7 @@ class GildedRoseTest {
     void qualityAndSellInNeverDecreaseForSulfuras() {
         Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 1, 50) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality == 50 && items[0].sellIn == 1);
     }
 
@@ -139,7 +139,7 @@ class GildedRoseTest {
     void qualityIncreasesAsSellInDecreasesForBackStagePasses() {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 11, 10) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality == 11 && items[0].sellIn == 10);
     }
 
@@ -147,7 +147,7 @@ class GildedRoseTest {
     void qualityIncreasesByTwoWhenSellInIsTenOrLessForBackStagePasses() {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality == 12);
     }
 
@@ -155,7 +155,7 @@ class GildedRoseTest {
     void qualityIncreasesByThreeWhenSellInIsFiveOrLessForBackStagePasses() {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality == 13);
     }
 
@@ -163,8 +163,17 @@ class GildedRoseTest {
     void qualityDropsToZeroWhenSellInIsZeroForBackStagePasses() {
         Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10) };
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateInventory();
         assertTrue(items[0].quality == 0);
+    }
+
+    // Requirement: "Conjured" items degrade in Quality twice as fast as normal items (and SellIn decreases)
+    @Test
+    void qualityDecreasesTwiceAsFastForConjuredItems() {
+        Item[] items = new Item[] { new Item("Conjured", 10, 10) };
+        GildedRose app = new GildedRose(items);
+        app.updateInventory();
+        assertTrue(items[0].quality == 8 && items[0].sellIn == 9);
     }
 
 }
