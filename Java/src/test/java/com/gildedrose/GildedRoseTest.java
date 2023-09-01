@@ -169,11 +169,27 @@ class GildedRoseTest {
 
     // Requirement: "Conjured" items degrade in Quality twice as fast as normal items (and SellIn decreases)
     @Test
-    void qualityDecreasesTwiceAsFastForConjuredItems() {
+    void qualityDecreasesTwiceAsFastForConjured() {
         Item[] items = new Item[] { new Item("Conjured", 10, 10) };
         GildedRose app = new GildedRose(items);
         app.updateInventory();
         assertTrue(items[0].quality == 8 && items[0].sellIn == 9);
+    }
+
+    @Test
+    void qualityDecreasesFourTimesAsFastForExpiredConjured() {
+        Item[] items = new Item[] { new Item("Conjured", 0, 10) };
+        GildedRose app = new GildedRose(items);
+        app.updateInventory();
+        assertTrue(items[0].quality == 6);
+    }
+
+    @Test
+    void qualityNeverNegativeForConjured() {
+        Item[] items = new Item[] { new Item("Conjured", 4, 1) };
+        GildedRose app = new GildedRose(items);
+        app.updateInventory();
+        assertTrue(items[0].quality == 0);
     }
 
 }
