@@ -126,10 +126,10 @@ class GildedRoseTest {
     //	Requirement: "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
     @Test
     void qualityAndSellInNeverDecreaseForSulfuras() {
-        Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 1, 50) };
+        Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", -1, 50) };
         GildedRose app = new GildedRose(items);
         app.updateInventory();
-        assertTrue(items[0].quality == 50 && items[0].sellIn == 1);
+        assertTrue(items[0].quality == 50 && items[0].sellIn == -1);
     }
 
     //	Requirement: "Backstage passes" increase in Quality as its SellIn value approaches (and SellIn decreases)
